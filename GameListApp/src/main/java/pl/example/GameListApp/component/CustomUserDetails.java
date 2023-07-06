@@ -1,5 +1,8 @@
 package pl.example.GameListApp.component;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +11,9 @@ import pl.example.GameListApp.entity.User;
 import java.util.Collection;
 import java.util.Collections;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     User user;
