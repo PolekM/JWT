@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.example.GameListApp.entity.User;
 import pl.example.GameListApp.service.UserService;
 
 @RestController
@@ -27,6 +28,10 @@ public class UserController {
         return "admin";
     }
 
+    @GetMapping("/current")
+    public User getUserDetails(){
+        return userService.getUserDetails();
+    }
 
 
 }

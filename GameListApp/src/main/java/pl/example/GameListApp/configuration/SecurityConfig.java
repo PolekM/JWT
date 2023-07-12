@@ -36,8 +36,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
-        return  configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
 
@@ -53,12 +53,6 @@ public class SecurityConfig {
         provider.setUserDetailsService(userDetailsService);
         return provider;
     }
-
-//    @Bean
-//    public void configureGlobal(AuthenticationManagerBuilder managerBuilder) throws Exception {
-//        managerBuilder.userDetailsService(userDetailsService);
-//    }
-
 
 
     @Bean
@@ -80,10 +74,6 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        //.formLogin(Customizer.withDefaults())
-
-//        httpSecurity.addFilterAfter(new JWTTokenValidatorFilter(), UsernamePasswordAuthenticationFilter.class);
-//        httpSecurity.addFilterBefore(new JWTGenerateTokenFilter(), JWTTokenValidatorFilter.class);
 
         return httpSecurity.build();
     }
