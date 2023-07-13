@@ -40,4 +40,16 @@ public class BoardServiceImp implements BoardService {
         deletedBoard.ifPresent(boardRepository::delete);
         return deletedBoard;
     }
+
+    @Override
+    public Optional<Board> updateGame(Board board) throws BoardException {
+        Optional<Board> updatedBoard = boardRepository.findById(board.getId());
+        if(updatedBoard.isEmpty()){
+            throw new BoardException("Board isn`t exist");
+        }
+        updatedBoard.get().setName(board.getName());
+        updatedBoard.get().setGameType(board.getGameType());
+        boardRepository.save(updatedBoard.get());
+        return updatedBoard;
+    }
 }

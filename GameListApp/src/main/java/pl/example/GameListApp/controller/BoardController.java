@@ -40,7 +40,8 @@ public class BoardController {
     }
     //todo - updateGame - ADMIN - zmiana wartości w grze
     @PutMapping("/update")
-    public Board updateGame(){
-        return null;
+    public Optional<Board> updateGame(@RequestBody Board board) throws BoardException {
+
+        return boardService.updateGame(board);
     }
 }

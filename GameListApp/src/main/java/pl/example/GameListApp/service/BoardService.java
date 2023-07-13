@@ -13,4 +13,6 @@ public interface BoardService {
     Board addNewGame(Board board);
 
     Optional<Board> removeGame(Long id) throws BoardException;
+
+    Optional<Board> updateGame(Board board) throws BoardException;
 }
