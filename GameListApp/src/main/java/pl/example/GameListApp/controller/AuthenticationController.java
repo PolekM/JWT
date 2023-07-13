@@ -18,10 +18,15 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-
     @PostMapping("/login")
     public String authenticate(@RequestBody JwtDto jwtDto){
         return authenticationService.authenticate(jwtDto);
+    }
+
+    @PostMapping("/register")
+    public String register(){
+        return null;
+        //todo rejestracja - ALL - Rejestracja do aplikacji
     }
 
 }

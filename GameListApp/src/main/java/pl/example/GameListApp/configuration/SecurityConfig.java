@@ -65,6 +65,8 @@ public class SecurityConfig {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/user/admin").hasRole("ADMIN")
+                        .requestMatchers("/board/games").permitAll()
+                        .requestMatchers("/board/new","board/remove/**","/board/update/**").hasRole("ADMIN")
                         .anyRequest()
                         .authenticated()
 
