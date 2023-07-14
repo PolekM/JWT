@@ -62,10 +62,10 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/login", "/register").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/user/admin").hasRole("ADMIN")
                         .requestMatchers("/board/games").permitAll()
+                        .requestMatchers("/user/{username}").permitAll()
                         .requestMatchers("/board/new","board/remove/**","/board/update/**").hasRole("ADMIN")
                         .anyRequest()
                         .authenticated()

@@ -2,8 +2,13 @@ package pl.example.GameListApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.example.GameListApp.Expection.BoardException;
+import pl.example.GameListApp.Expection.UserException;
+import pl.example.GameListApp.dto.BoardDto;
 import pl.example.GameListApp.entity.User;
 import pl.example.GameListApp.service.UserService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -16,18 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    //todo usunąć testowe
-    @GetMapping("/user")
-    public String testUser(){
-        return "user";
-    }
-    //todo usunąć testowe
-    @GetMapping("/admin")
-    public String testAdmin(){
-        return "admin";
-    }
-
-    @GetMapping("/current")
+    @GetMapping("/details")
     public User getUserDetails(){
         return userService.getUserDetails();
     }
@@ -35,16 +29,20 @@ public class UserController {
     //todo - changePassword - auth - zmiana hasła użytkownika
 
     //todo - getGame  - permitAll - wyświetlenie wsyzstkich gier danego użytkownika
-
+    @GetMapping("/{username}")
+    public List<BoardDto> getUserGame(@PathVariable(name = "username") String username) throws UserException {
+        return userService.getUserGame(username);
+    }
     //todo - addGame - auth - dodanie gry do listy użytkownika
+    @PutMapping("/add/{gameId}")
+    public List<BoardDto> addUserGame(@PathVariable(name = "gameId") long id) throws BoardException {
+        return userService.addUserGame(id);
+    }
 
     //todo - removeGame - auth - usuniecie gry z listy użytkownika
-
-
-    @PutMapping("/{userId}/board/{boardId}")
-    public String addGameToUser(@PathVariable Long userId,@PathVariable Long boardId){
-        userService.addGameToUser(userId,boardId);
-        return "dodano";
+    @DeleteMapping("/remove/{gameId}")
+    public List<BoardDto> removeUserGame(@PathVariable(name = "gameId") long id) throws BoardException {
+        return userService.removeUserGame(id);
     }
 
 

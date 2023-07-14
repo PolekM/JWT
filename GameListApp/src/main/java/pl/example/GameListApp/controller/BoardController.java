@@ -20,24 +20,28 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    //todo - Search - ALL - Wyszukiwanie gier po nazwie
+
     //todo - Games - ALL - wyświetlenie wsyzstkich planszówek
 
     @GetMapping("games")
-    public List<Board> getAllGame(){
+    public List<Board> getAllGame() {
         return boardService.getAllGames();
     }
 
     //todo - addNewGame - ADMIN - dodanie nowej gry do bazy danych
     @PostMapping("/new")
-    public Board addNewGame(@RequestBody Board board){
+    public Board addNewGame(@RequestBody Board board) {
         return boardService.addNewGame(board);
     }
+
     //todo - removeGame - ADMIN - usunięcie planszówki z danych
     @DeleteMapping("/remove/{gameId}")
     public Optional<Board> removeGame(@PathVariable(name = "gameId") Long id) throws BoardException {
         return boardService.removeGame(id);
 
     }
+
     //todo - updateGame - ADMIN - zmiana wartości w grze
     @PutMapping("/update")
     public Optional<Board> updateGame(@RequestBody Board board) throws BoardException {
