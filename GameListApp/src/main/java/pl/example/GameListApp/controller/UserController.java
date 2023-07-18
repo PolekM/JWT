@@ -1,11 +1,14 @@
 package pl.example.GameListApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.example.GameListApp.Expection.BoardException;
+import pl.example.GameListApp.Expection.ChangePasswordException;
 import pl.example.GameListApp.Expection.UserException;
 import pl.example.GameListApp.dto.BoardDto;
-import pl.example.GameListApp.entity.User;
+import pl.example.GameListApp.dto.ChangePasswordDTO;
+import pl.example.GameListApp.dto.UserDto;
 import pl.example.GameListApp.service.UserService;
 
 import java.util.List;
@@ -22,11 +25,16 @@ public class UserController {
     }
 
     @GetMapping("/details")
-    public User getUserDetails(){
+    public UserDto getUserDetails(){
         return userService.getUserDetails();
     }
 
     //todo - changePassword - auth - zmiana hasła użytkownika
+    @PutMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) throws ChangePasswordException {
+        return userService.changePassword(changePasswordDTO);
+    }
+
 
     //todo - getGame  - permitAll - wyświetlenie wsyzstkich gier danego użytkownika
     @GetMapping("/{username}")

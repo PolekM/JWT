@@ -1,12 +1,16 @@
 package pl.example.GameListApp.controller;
 
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.example.GameListApp.Expection.CustomAuthenticationException;
 import pl.example.GameListApp.dto.JwtDto;
-import pl.example.GameListApp.service.imp.AuthenticationService;
+import pl.example.GameListApp.dto.RegisterDto;
+import pl.example.GameListApp.service.AuthenticationService;
 
 @RestController
 public class AuthenticationController {
@@ -24,9 +28,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(){
-        return null;
-        //todo rejestracja - ALL - Rejestracja do aplikacji
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto) throws CustomAuthenticationException {
+        return authenticationService.register(registerDto);
     }
 
 }

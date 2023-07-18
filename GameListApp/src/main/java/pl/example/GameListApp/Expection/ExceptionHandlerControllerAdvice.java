@@ -21,4 +21,19 @@ public class ExceptionHandlerControllerAdvice {
         return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ChangePasswordException.class)
+    public ResponseEntity<?> changePasswordExceptionHandler(ChangePasswordException changePasswordException){
+        Error error = new Error(changePasswordException.getMessage(), changePasswordException.getCause());
+        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CustomAuthenticationException.class)
+    public ResponseEntity<?> AuthenticationException(CustomAuthenticationException customAuthenticationException){
+        Error error = new Error(customAuthenticationException.getMessage(),customAuthenticationException.getCause());
+        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+    }
+
+
+
+
 }

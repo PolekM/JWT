@@ -7,6 +7,7 @@ import pl.example.GameListApp.entity.Board;
 import pl.example.GameListApp.repository.BoardRepository;
 import pl.example.GameListApp.service.BoardService;
 
+import javax.management.InstanceNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class BoardServiceImp implements BoardService {
     public Optional<Board> removeGame(Long id) throws BoardException {
         Optional<Board> deletedBoard = boardRepository.findById(id);
         if(deletedBoard.isEmpty()){
-            throw new BoardException("Board isn`t exist");
+            throw new BoardException("Board isn`t exist", new InstanceNotFoundException());
         }
         deletedBoard.ifPresent(boardRepository::delete);
         return deletedBoard;
@@ -45,7 +46,7 @@ public class BoardServiceImp implements BoardService {
     public Optional<Board> updateGame(Board board) throws BoardException {
         Optional<Board> updatedBoard = boardRepository.findById(board.getId());
         if(updatedBoard.isEmpty()){
-            throw new BoardException("Board isn`t exist");
+            throw new BoardException("Board isn`t exist",new InstanceNotFoundException());
         }
         updatedBoard.get().setName(board.getName());
         updatedBoard.get().setGameType(board.getGameType());
