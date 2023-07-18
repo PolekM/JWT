@@ -1,6 +1,6 @@
 package pl.example.GameListApp.Expection;
 
-public class ChangePasswordException extends Exception{
+public class ChangePasswordException extends Exception {
 
     public ChangePasswordException(String message) {
         super(message);

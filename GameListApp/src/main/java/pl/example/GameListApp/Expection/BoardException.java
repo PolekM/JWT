@@ -1,7 +1,7 @@
 package pl.example.GameListApp.Expection;
 
 
-public class BoardException extends Exception{
+public class BoardException extends Exception {
 
     public BoardException(String message) {
         super(message);

@@ -24,30 +24,32 @@ public class UserController {
         this.userService = userService;
     }
 
+    //Permission - Authentication User. Show user details
     @GetMapping("/details")
-    public UserDto getUserDetails(){
+    public UserDto getUserDetails() {
         return userService.getUserDetails();
     }
 
-    //todo - changePassword - auth - zmiana hasła użytkownika
+    //Permission - Authentication User. Changing Password
     @PutMapping("/changePassword")
     public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) throws ChangePasswordException {
         return userService.changePassword(changePasswordDTO);
     }
 
 
-    //todo - getGame  - permitAll - wyświetlenie wsyzstkich gier danego użytkownika
+    //Permission - ALL. Get list selected user
     @GetMapping("/{username}")
     public List<BoardDto> getUserGame(@PathVariable(name = "username") String username) throws UserException {
         return userService.getUserGame(username);
     }
-    //todo - addGame - auth - dodanie gry do listy użytkownika
+
+    //Permission - Authentication User. Add game to user list
     @PutMapping("/add/{gameId}")
     public List<BoardDto> addUserGame(@PathVariable(name = "gameId") long id) throws BoardException {
         return userService.addUserGame(id);
     }
 
-    //todo - removeGame - auth - usuniecie gry z listy użytkownika
+    //Permission - Authentication User. remove game form user list
     @DeleteMapping("/remove/{gameId}")
     public List<BoardDto> removeUserGame(@PathVariable(name = "gameId") long id) throws BoardException {
         return userService.removeUserGame(id);

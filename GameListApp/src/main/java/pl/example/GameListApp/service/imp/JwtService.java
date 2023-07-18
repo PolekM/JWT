@@ -21,26 +21,26 @@ import static pl.example.GameListApp.configuration.SecurityConstants.JWT_KEY;
 public class JwtService {
 
 
-    public String extractUsername(String token){
+    public String extractUsername(String token) {
         return extractClaim(token, claims -> claims.getSubject());
     }
 
-    public String generateToken(CustomUserDetails customUserDetails){
-        return generateToken(new HashMap<>(),customUserDetails);
+    public String generateToken(CustomUserDetails customUserDetails) {
+        return generateToken(new HashMap<>(), customUserDetails);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, CustomUserDetails customUserDetails){
+    public String generateToken(Map<String, Object> extraClaims, CustomUserDetails customUserDetails) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(customUserDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 ))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public  boolean isTokenValid(String token, UserDetails customUserDetails){
+    public boolean isTokenValid(String token, UserDetails customUserDetails) {
         final String username = extractUsername(token);
         return (username.equals(customUserDetails.getUsername()) && !isTokenExpired(token));
     }
@@ -53,12 +53,12 @@ public class JwtService {
         return extractClaim(token, claims -> claims.getExpiration());
     }
 
-    public <T> T extractClaim(String token, Function<Claims,T> claimsResolver){
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token){
+    private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())

@@ -6,7 +6,7 @@ import pl.example.GameListApp.entity.Board;
 
 public class BoardSpecification {
 
-    public static Specification<Board> boardSpecificationFindByName(BoardByNameDto boardByNameDto){
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%"+boardByNameDto.getBoardName().toLowerCase() + "%");
+    public static Specification<Board> boardSpecificationFindByName(BoardByNameDto boardByNameDto) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + boardByNameDto.getBoardName().toLowerCase() + "%");
     }
 }

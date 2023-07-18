@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import pl.example.GameListApp.entity.Board;
 
 @Repository
-public interface BoardRepository extends JpaRepository<Board,Long>, JpaSpecificationExecutor<Board> {
+public interface BoardRepository extends JpaRepository<Board, Long>, JpaSpecificationExecutor<Board> {
 }

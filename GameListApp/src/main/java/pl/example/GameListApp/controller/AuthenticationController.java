@@ -22,11 +22,14 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
+
+    //Permission - ALL. login to app
     @PostMapping("/login")
-    public String authenticate(@RequestBody JwtDto jwtDto){
+    public String authenticate(@RequestBody JwtDto jwtDto) {
         return authenticationService.authenticate(jwtDto);
     }
 
+    //Permission - ALL. register to app.
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto) throws CustomAuthenticationException {
         return authenticationService.register(registerDto);

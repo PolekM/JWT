@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.example.GameListApp.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findBymail(String mail);
 
 }

@@ -21,7 +21,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    private  final AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationServiceImp(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
@@ -31,26 +31,26 @@ public class AuthenticationServiceImp implements AuthenticationService {
     }
 
     public String authenticate(JwtDto jwtDto) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtDto.getMail(),jwtDto.getPassword()));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtDto.getMail(), jwtDto.getPassword()));
         User user = userRepository.findBymail(jwtDto.getMail());
         CustomUserDetails customUserDetails = new CustomUserDetails(user);
-        String token  = jwtService.generateToken(customUserDetails);
+        String token = jwtService.generateToken(customUserDetails);
         System.out.println(token);
-        return  token;
+        return token;
 
     }
 
     public ResponseEntity<String> register(RegisterDto registerDto) throws CustomAuthenticationException {
         User userInDB = userRepository.findBymail(registerDto.getMail());
-        if(userInDB!= null)
+        if (userInDB != null)
             throw new CustomAuthenticationException("email is busy");
-        if(!registerDto.getPassword().equals(registerDto.getRepeatPassword()))
+        if (!registerDto.getPassword().equals(registerDto.getRepeatPassword()))
             throw new CustomAuthenticationException("New Password aren`t the same");
         userRepository.save(user(registerDto));
         return ResponseEntity.ok("Yor account has been created");
     }
 
-    public User user(RegisterDto registerDto){
+    public User user(RegisterDto registerDto) {
         User user = new User();
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         user.setMail(registerDto.getMail());

@@ -22,33 +22,32 @@ public class BoardController {
     }
 
 
-    //todo - Games - ALL - wyświetlenie wsyzstkich planszówek
-
+    //Permission - ALL. Show all games
     @GetMapping("games")
     public List<Board> getAllGame() {
         return boardService.getAllGames();
     }
 
-    //todo - addNewGame - ADMIN - dodanie nowej gry do bazy danych
+    //Permission - ADMIN. Add new game
     @PostMapping("/new")
     public Board addNewGame(@RequestBody Board board) {
         return boardService.addNewGame(board);
     }
 
-    //todo - Search - ALL - Wyszukiwanie gier po nazwie
+    //Permission - ALL. Search Game by Name
     @PostMapping("/search")
-    public List<Board> findBoardByName(@RequestBody BoardByNameDto boardByNameDto){
+    public List<Board> findBoardByName(@RequestBody BoardByNameDto boardByNameDto) {
         return boardService.findBoardByName(boardByNameDto);
     }
 
-    //todo - removeGame - ADMIN - usunięcie planszówki z danych
+    //Permission - ADMIN. Remove game
     @DeleteMapping("/remove/{gameId}")
     public Optional<Board> removeGame(@PathVariable(name = "gameId") Long id) throws BoardException {
         return boardService.removeGame(id);
 
     }
 
-    //todo - updateGame - ADMIN - zmiana wartości w grze
+    //Permission - ADMIN. Update game
     @PutMapping("/update")
     public Optional<Board> updateGame(@RequestBody Board board) throws BoardException {
         return boardService.updateGame(board);

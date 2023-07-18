@@ -14,7 +14,6 @@ public interface UserService {
     UserDto getUserDetails();
 
 
-
     List<BoardDto> getUserGame(String username) throws UserException;
 
     List<BoardDto> addUserGame(long id) throws BoardException;

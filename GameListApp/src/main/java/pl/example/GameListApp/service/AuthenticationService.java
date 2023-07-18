@@ -8,5 +8,6 @@ import pl.example.GameListApp.dto.RegisterDto;
 public interface AuthenticationService {
 
     String authenticate(JwtDto jwtDto);
+
     ResponseEntity<String> register(RegisterDto registerDto) throws CustomAuthenticationException;
 }

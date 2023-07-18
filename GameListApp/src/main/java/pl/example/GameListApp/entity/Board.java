@@ -32,5 +32,4 @@ public class Board implements Serializable {
 //    private Set<User> user = new HashSet<>();
 
 
-
 }

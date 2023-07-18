@@ -1,6 +1,6 @@
 package pl.example.GameListApp.Expection;
 
-public class CustomAuthenticationException extends Exception{
+public class CustomAuthenticationException extends Exception {
 
     public CustomAuthenticationException(String message) {
         super(message);

@@ -37,7 +37,7 @@ public class BoardServiceImp implements BoardService {
     @Override
     public Optional<Board> removeGame(Long id) throws BoardException {
         Optional<Board> deletedBoard = boardRepository.findById(id);
-        if(deletedBoard.isEmpty()){
+        if (deletedBoard.isEmpty()) {
             throw new BoardException("Board isn`t exist", new InstanceNotFoundException());
         }
         deletedBoard.ifPresent(boardRepository::delete);
@@ -47,8 +47,8 @@ public class BoardServiceImp implements BoardService {
     @Override
     public Optional<Board> updateGame(Board board) throws BoardException {
         Optional<Board> updatedBoard = boardRepository.findById(board.getId());
-        if(updatedBoard.isEmpty()){
-            throw new BoardException("Board isn`t exist",new InstanceNotFoundException());
+        if (updatedBoard.isEmpty()) {
+            throw new BoardException("Board isn`t exist", new InstanceNotFoundException());
         }
         updatedBoard.get().setName(board.getName());
         updatedBoard.get().setGameType(board.getGameType());
@@ -59,7 +59,7 @@ public class BoardServiceImp implements BoardService {
     @Override
     public List<Board> findBoardByName(BoardByNameDto boardByNameDto) {
 
-       return boardRepository.findAll(BoardSpecification.boardSpecificationFindByName(boardByNameDto));
+        return boardRepository.findAll(BoardSpecification.boardSpecificationFindByName(boardByNameDto));
 
     }
 }
