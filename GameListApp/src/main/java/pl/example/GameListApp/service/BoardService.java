@@ -2,6 +2,7 @@ package pl.example.GameListApp.service;
 
 
 import pl.example.GameListApp.Expection.BoardException;
+import pl.example.GameListApp.dto.BoardByNameDto;
 import pl.example.GameListApp.entity.Board;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface BoardService {
     Optional<Board> removeGame(Long id) throws BoardException;
 
     Optional<Board> updateGame(Board board) throws BoardException;
+
+    List<Board> findBoardByName(BoardByNameDto boardByNameDto);
 }

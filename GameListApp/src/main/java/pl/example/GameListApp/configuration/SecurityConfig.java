@@ -64,7 +64,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                         .requestMatchers("/login", "/register").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/board/games").permitAll()
+                        .requestMatchers("/board/games","/board/search").permitAll()
                         .requestMatchers("/user/{username}").permitAll()
                         .requestMatchers("/board/new","board/remove/**","/board/update/**").hasRole("ADMIN")
                         .anyRequest()

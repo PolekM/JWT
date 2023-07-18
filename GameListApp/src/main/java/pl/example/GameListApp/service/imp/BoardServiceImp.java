@@ -3,9 +3,11 @@ package pl.example.GameListApp.service.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.example.GameListApp.Expection.BoardException;
+import pl.example.GameListApp.dto.BoardByNameDto;
 import pl.example.GameListApp.entity.Board;
 import pl.example.GameListApp.repository.BoardRepository;
 import pl.example.GameListApp.service.BoardService;
+import pl.example.GameListApp.specification.BoardSpecification;
 
 import javax.management.InstanceNotFoundException;
 import java.util.List;
@@ -52,5 +54,12 @@ public class BoardServiceImp implements BoardService {
         updatedBoard.get().setGameType(board.getGameType());
         boardRepository.save(updatedBoard.get());
         return updatedBoard;
+    }
+
+    @Override
+    public List<Board> findBoardByName(BoardByNameDto boardByNameDto) {
+
+       return boardRepository.findAll(BoardSpecification.boardSpecificationFindByName(boardByNameDto));
+
     }
 }
