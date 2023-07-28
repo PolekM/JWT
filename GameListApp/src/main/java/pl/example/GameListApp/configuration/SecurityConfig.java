@@ -63,12 +63,13 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                         .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/board/games", "/board/search").permitAll()
                         .requestMatchers("/user/{username}").permitAll()
                         .requestMatchers("/board/new", "board/remove/**", "/board/update/**").hasRole("ADMIN")
                         .anyRequest()
-                        .authenticated()
+                        .permitAll()
 
                 )
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
